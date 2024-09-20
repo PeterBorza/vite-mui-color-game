@@ -1,31 +1,37 @@
-import { CssBaseline, Paper, Stack } from "@mui/material";
-import { ColorBall, NavBar } from "components";
+import { Container, CssBaseline, Grid2, Stack } from "@mui/material";
+import { NavBar } from "components";
+import Guesses from "components/Guesses";
+import Palette from "components/Palette";
+import Panel from "components/Panel";
+import { COLORS } from "constants";
 
 const App = () => {
   return (
     <>
       <CssBaseline />
       <NavBar />
-      <Stack spacing={4} p={2}>
-        <Paper elevation={5} sx={{ alignSelf: "start" }}>
-          <Stack
-            direction="row"
-            spacing={2}
-            p={2}
-            sx={{
-              bgcolor: "primary.main",
-              borderRadius: 1,
-            }}
-          >
-            <ColorBall bgcolor="amber.main" />
-            <ColorBall bgcolor="red.main" />
-            <ColorBall bgcolor="blue.main" />
-            <ColorBall bgcolor="green.main" />
-            <ColorBall bgcolor="lightGreen.main" />
-            <ColorBall bgcolor="lightBlue.main" />
-          </Stack>
-        </Paper>
-      </Stack>
+      <Container
+        maxWidth="xl"
+        sx={{
+          mt: 2,
+          width: 1100,
+          height: 600,
+          maxHeight: "100%",
+          borderRadius: 2,
+        }}
+      >
+        <Grid2 container spacing={1} width="100%" height="100%">
+          <Panel title="Game">
+            <Stack spacing={2} p={2} alignItems="center">
+              <Palette colors={COLORS} />
+            </Stack>
+          </Panel>
+          <Panel title="Guesses">
+            <Guesses guessCount={6} />
+          </Panel>
+          <Panel title="Results">Work in progress</Panel>
+        </Grid2>
+      </Container>
     </>
   );
 };
