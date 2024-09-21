@@ -20,7 +20,7 @@ const App = () => {
           borderRadius: 2,
         }}
       >
-        <Grid2 container spacing={1} width="100%" height="100%">
+        <Grid2 container spacing={2} width="100%" height="100%">
           <Panel title="Game">
             <Stack spacing={2} p={2} alignItems="center">
               <Palette colors={COLORS} />
