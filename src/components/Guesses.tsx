@@ -7,10 +7,10 @@ type Props = {
 };
 
 const Guesses = ({ guessCount }: Props) => {
-  const arr = new Array(guessCount);
+  const arrayFromGuessCount = new Array(guessCount);
   return (
     <Stack spacing={1} p={2} alignItems="center">
-      {arr.fill(null).map(item => (
+      {arrayFromGuessCount.fill(null).map(_ => (
         <Palette key={uuid()} />
       ))}
     </Stack>
