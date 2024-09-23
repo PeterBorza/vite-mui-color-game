@@ -7,8 +7,8 @@ type ColorBall = {
 const MyBox = (props: BoxProps) => <MuiBox {...props}>{props.children}</MuiBox>;
 
 export const ColorBall = styled(MyBox)(({ bgcolor }: ColorBall) => ({
-  width: 30,
-  height: 30,
+  width: "clamp(15px, 3rem, 30px)",
+  aspectRatio: 1,
   borderRadius: "100%",
   backgroundColor: bgcolor,
   boxShadow:

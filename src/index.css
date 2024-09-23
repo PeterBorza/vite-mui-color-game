@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Carter+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
+
 *,
 *::before,
 *::after {
@@ -9,11 +10,20 @@
   box-sizing: border-box;
 }
 
+html {
+  font-family: "Nunito Sans", "Courier New", "Courier", monospace;
+  background-color: "#cfcccc";
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
 #root {
   width: 100vw;
-  height: 100dvh;
-  min-width: 320px;
-  min-height: 100dvh;
-  background-color: #cfcccc;
-  font-family: "Nunito Sans", "Courier New", "Courier", monospace;
+  height: 100vh;
+  min-height: 100vh;
 }
