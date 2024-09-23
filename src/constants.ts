@@ -14,3 +14,5 @@ export const COLORS: ColorCode[] = [
   "lightGreen",
   "lightBlue",
 ];
+
+export const NAV_TITLE = "Color Code";

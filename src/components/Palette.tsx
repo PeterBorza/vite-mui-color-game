@@ -1,31 +1,19 @@
 import { Paper, Stack } from "@mui/material";
-import { ColorBall } from "./ColorBall";
-import { FC } from "react";
-import { ColorCode } from "constants";
-import { v4 as uuid } from "uuid";
+import { FC, PropsWithChildren } from "react";
 
-type Props = {
-  colors?: ColorCode[];
-  emptySlotsCount?: number;
-};
-
-const Palette: FC<Props> = ({ colors, emptySlotsCount = 4 }) => {
-  const fillSlots = () => colors ?? new Array(emptySlotsCount).fill(null);
-
+const Palette: FC<PropsWithChildren> = ({ children }) => {
   return (
     <Paper elevation={8}>
       <Stack
         direction="row"
-        spacing={2}
+        spacing={1}
         p={1}
         sx={{
           bgcolor: "primary.main",
           borderRadius: 1,
         }}
       >
-        {fillSlots().map(color => (
-          <ColorBall key={uuid()} bgcolor={color} />
-        ))}
+        {children}
       </Stack>
     </Paper>
   );
