@@ -1,12 +1,10 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { ColorBall } from "components/ColorBall";
+import { ClientDataType } from "context";
+import { getColorHash } from "converters";
 
-type Props = {
-  id: string;
-};
-
-const SortableItem = ({ id }: Props) => {
+const SortableItem = ({ id, code }: ClientDataType) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id });
 
@@ -16,9 +14,11 @@ const SortableItem = ({ id }: Props) => {
     cursor: "move",
   };
 
+  const getCode = (code: string) => getColorHash(code);
+
   return (
     <div style={style} ref={setNodeRef} {...attributes} {...listeners}>
-      <ColorBall bgcolor={id} />
+      <ColorBall bgcolor={getCode(code)} />
     </div>
   );
 };
