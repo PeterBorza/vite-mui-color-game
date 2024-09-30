@@ -26,8 +26,5 @@ export const getCollectionDocs = async <T>(path: string) => {
   return docsRef.docs.map(doc => ({ ...(doc.data() as T), id: doc.id }));
 };
 
-export const getColors = async () => {
-  const data = await getCollectionDocs<ColorType>("colors");
-
-  return data;
-};
+export const getColors = async () =>
+  await getCollectionDocs<ColorType>("colors");

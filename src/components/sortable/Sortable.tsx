@@ -23,7 +23,6 @@ import {
 } from "@dnd-kit/modifiers";
 import SortableItem from "./SortableItem";
 import { ClientDataType } from "context";
-import { getColorHash } from "converters";
 
 type Props = {
   sortItems: ClientDataType[];
@@ -58,8 +57,6 @@ const Sortable = ({
     }
   };
 
-  const getCode = (code: string) => getColorHash(code);
-
   return (
     <DndContext
       sensors={sensors}
@@ -69,7 +66,7 @@ const Sortable = ({
     >
       <SortableContext items={sortItems} strategy={sortingStrategy}>
         {sortItems.map(item => (
-          <SortableItem key={item.id} id={item.id} code={item.code} />
+          <SortableItem key={item.id} {...item} />
         ))}
       </SortableContext>
     </DndContext>
