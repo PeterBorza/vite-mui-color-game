@@ -69,7 +69,7 @@ const Sortable = ({
     >
       <SortableContext items={sortItems} strategy={sortingStrategy}>
         {sortItems.map(item => (
-          <SortableItem key={item.id} id={getCode(item.code)} />
+          <SortableItem key={item.id} id={item.id} code={item.code} />
         ))}
       </SortableContext>
     </DndContext>
