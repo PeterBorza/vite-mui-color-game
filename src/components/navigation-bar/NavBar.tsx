@@ -7,8 +7,14 @@ import {
   Typography,
 } from "@mui/material";
 import Logo from "./Logo";
+import { NEW_GAME } from "constants";
+import { FC } from "react";
 
-const NavBar = () => {
+type Props = {
+  resetGame: () => void;
+};
+
+const NavBar: FC<Props> = ({ resetGame }) => {
   const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
   return (
     <>
@@ -21,8 +27,8 @@ const NavBar = () => {
             flexGrow={1}
           >
             <Logo />
-            <Button variant="contained">
-              <Typography noWrap>New Game</Typography>
+            <Button onClick={resetGame} variant="contained">
+              <Typography noWrap>{NEW_GAME}</Typography>
             </Button>
           </Stack>
         </Toolbar>

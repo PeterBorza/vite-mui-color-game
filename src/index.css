@@ -12,7 +12,6 @@
 
 html {
   font-family: "Nunito Sans", "Courier New", "Courier", monospace;
-  background-color: "#cfcccc";
 
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -26,4 +25,5 @@ html::-webkit-scrollbar {
   width: 100vw;
   height: 100vh;
   min-height: 100vh;
+  background-color: "#cfcccc";
 }

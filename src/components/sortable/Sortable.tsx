@@ -1,67 +1,79 @@
-import { useState } from "react";
 import {
-  DndContext,
   closestCenter,
+  DndContext,
+  DragEndEvent,
   KeyboardSensor,
   PointerSensor,
+  TouchSensor,
   useSensor,
   useSensors,
-  DragEndEvent,
 } from "@dnd-kit/core";
 import {
   arrayMove,
+  horizontalListSortingStrategy,
   SortableContext,
   sortableKeyboardCoordinates,
   SortingStrategy,
-  verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { Dispatch, SetStateAction } from "react";
 
+import {
+  restrictToHorizontalAxis,
+  restrictToParentElement,
+} from "@dnd-kit/modifiers";
 import SortableItem from "./SortableItem";
-import Palette from "components/Palette";
+import { ClientDataType } from "context";
+import { getColorHash } from "converters";
 
 type Props = {
-  sortItems: string[];
+  sortItems: ClientDataType[];
+  setSortItems: Dispatch<SetStateAction<ClientDataType[]>>;
   sortingStrategy?: SortingStrategy;
 };
 
 const Sortable = ({
   sortItems,
-  sortingStrategy = verticalListSortingStrategy,
+  setSortItems,
+  sortingStrategy = horizontalListSortingStrategy,
 }: Props) => {
-  const [items, setItems] = useState(sortItems);
   const sensors = useSensors(
     useSensor(PointerSensor),
+    useSensor(TouchSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+      setSortItems(items => {
+        const ids = items.map(i => i.id);
+        const oldIndex = ids.indexOf(active.id as string);
+        const newIndex = ids.indexOf(over.id as string);
+
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  };
+
+  const getCode = (code: string) => getColorHash(code);
 
   return (
     <DndContext
       sensors={sensors}
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
+      modifiers={[restrictToHorizontalAxis, restrictToParentElement]}
     >
-      <SortableContext items={items} strategy={sortingStrategy}>
-        {items.map(id => (
-          <SortableItem key={id} id={id} />
+      <SortableContext items={sortItems} strategy={sortingStrategy}>
+        {sortItems.map(item => (
+          <SortableItem key={item.id} id={getCode(item.code)} />
         ))}
       </SortableContext>
     </DndContext>
   );
-
-  function handleDragEnd(event: DragEndEvent) {
-    const { active, over } = event;
-
-    if (over && active.id !== over.id) {
-      setItems(items => {
-        const oldIndex = items.indexOf(active.id as string);
-        const newIndex = items.indexOf(over.id as string);
-
-        return arrayMove(items, oldIndex, newIndex);
-      });
-    }
-  }
 };
 
 export default Sortable;
