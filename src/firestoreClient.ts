@@ -1,9 +1,6 @@
 import { db } from "config/firestore";
 import { DocumentData, QueryDocumentSnapshot, collection, getDocs } from "firebase/firestore";
-
-export type ColorType = {
-  code: string;
-};
+import { ColorType } from "types";
 
 const getConverter = <T>() => ({
   toFirestore: (data: T) => data as DocumentData,
