@@ -1,14 +1,8 @@
-import {
-  AppBar,
-  Button,
-  Stack,
-  styled,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-import Logo from "./Logo";
-import { NEW_GAME } from "constants";
+import { AppBar, Button, Stack, Toolbar, Typography, styled } from "@mui/material";
 import { FC } from "react";
+import { NEW_GAME } from "utils";
+
+import Logo from "./Logo";
 
 type Props = {
   resetGame: () => void;
@@ -20,12 +14,7 @@ const NavBar: FC<Props> = ({ resetGame }) => {
     <>
       <AppBar position="fixed">
         <Toolbar>
-          <Stack
-            direction="row"
-            justifyContent="space-around"
-            alignItems="center"
-            flexGrow={1}
-          >
+          <Stack direction="row" justifyContent="space-around" alignItems="center" flexGrow={1}>
             <Logo />
             <Button onClick={resetGame} variant="contained">
               <Typography noWrap>{NEW_GAME}</Typography>

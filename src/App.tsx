@@ -1,7 +1,7 @@
 import { CssBaseline, Stack } from "@mui/material";
-import { Layout, NavBar, Palette, Sortable, Panel } from "components";
-import { PHASES } from "./constants";
+import { Layout, NavBar, Palette, Panel, Sortable } from "components";
 import { useColors } from "context";
+import { PHASES } from "utils";
 
 const App = () => {
   const { colors, setColors } = useColors();
