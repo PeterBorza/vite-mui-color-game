@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material";
-import { NAV_TITLE } from "constants";
-import w1 from "../../assets/images/w1.jpg";
+import { NAV_TITLE } from "utils";
+
+import w1 from "assets/images/w1.jpg";
 
 const Logo = () => {
   return (

@@ -1,10 +1,5 @@
 import { db } from "config/firestore";
-import {
-  collection,
-  DocumentData,
-  getDocs,
-  QueryDocumentSnapshot,
-} from "firebase/firestore";
+import { DocumentData, QueryDocumentSnapshot, collection, getDocs } from "firebase/firestore";
 
 export type ColorType = {
   code: string;
@@ -26,5 +21,4 @@ export const getCollectionDocs = async <T>(path: string) => {
   return docsRef.docs.map(doc => ({ ...(doc.data() as T), id: doc.id }));
 };
 
-export const getColors = async () =>
-  await getCollectionDocs<ColorType>("colors");
+export const getColors = async () => await getCollectionDocs<ColorType>("colors");

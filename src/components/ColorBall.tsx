@@ -1,4 +1,4 @@
-import { Box as MuiBox, BoxProps, styled } from "@mui/material";
+import { BoxProps, Box as MuiBox, styled } from "@mui/material";
 
 type ColorBall = {
   bgcolor?: string;
@@ -12,8 +12,7 @@ export const ColorBall = styled(MyBox)(({ bgcolor }: ColorBall) => ({
   aspectRatio: 1,
   borderRadius: "100%",
   backgroundColor: bgcolor,
-  boxShadow:
-    "1px 1px 3px rgba(255, 255, 255, 0.4), inset 4px 4px 10px rgba(0,0,0,0.4)",
+  boxShadow: "1px 1px 3px rgba(255, 255, 255, 0.4), inset 4px 4px 10px rgba(0,0,0,0.4)",
   transition: "all 100ms ease-in-out",
   "&:after": {
     content: '""',

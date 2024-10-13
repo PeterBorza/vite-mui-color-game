@@ -1,13 +1,13 @@
+import { ColorType, getColors } from "firestoreClient";
 import {
-  createContext,
   Dispatch,
   ReactNode,
   SetStateAction,
+  createContext,
   useContext,
   useEffect,
   useState,
 } from "react";
-import { ColorType, getColors } from "firestoreClient";
 
 export type ClientDataType = ColorType & { id: string };
 
@@ -23,11 +23,7 @@ const initialContext: ColorsContextType = {
 
 const ColorsContext = createContext<ColorsContextType>(initialContext);
 
-export const ColorsContextProvider = ({
-  children,
-}: {
-  children: ReactNode;
-}) => {
+export const ColorsContextProvider = ({ children }: { children: ReactNode }) => {
   const [colors, setColors] = useState<ClientDataType[]>([]);
 
   const getAsyncColors = async () => {
@@ -40,11 +36,7 @@ export const ColorsContextProvider = ({
     getAsyncColors();
   }, []);
 
-  return (
-    <ColorsContext.Provider value={{ colors, setColors }}>
-      {children}
-    </ColorsContext.Provider>
-  );
+  return <ColorsContext.Provider value={{ colors, setColors }}>{children}</ColorsContext.Provider>;
 };
 
 export const useColors = () => useContext(ColorsContext);

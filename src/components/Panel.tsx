@@ -1,4 +1,4 @@
-import { Grid2, Grid2Props, Paper, styled, Typography } from "@mui/material";
+import { Grid2, Grid2Props, Paper, Typography, styled } from "@mui/material";
 import { FC, PropsWithChildren } from "react";
 
 type Props = {

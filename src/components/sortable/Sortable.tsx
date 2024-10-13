@@ -1,28 +1,30 @@
 import {
-  closestCenter,
   DndContext,
   DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
   KeyboardSensor,
   PointerSensor,
   TouchSensor,
+  closestCenter,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
+import { restrictToParentElement } from "@dnd-kit/modifiers";
 import {
+  SortableContext,
+  SortingStrategy,
   arrayMove,
   horizontalListSortingStrategy,
-  SortableContext,
   sortableKeyboardCoordinates,
-  SortingStrategy,
 } from "@dnd-kit/sortable";
-import { Dispatch, SetStateAction } from "react";
-
-import {
-  restrictToHorizontalAxis,
-  restrictToParentElement,
-} from "@dnd-kit/modifiers";
-import SortableItem from "./SortableItem";
+import { ColorBall } from "components";
 import { ClientDataType } from "context";
+import { Dispatch, SetStateAction, useState } from "react";
+import { createPortal } from "react-dom";
+import { getColorHash } from "utils";
+
+import { SortableItem } from "./SortableItem";
 
 type Props = {
   sortItems: ClientDataType[];
@@ -30,20 +32,30 @@ type Props = {
   sortingStrategy?: SortingStrategy;
 };
 
-const Sortable = ({
+export const Sortable = ({
   sortItems,
   setSortItems,
   sortingStrategy = horizontalListSortingStrategy,
 }: Props) => {
+  const [activeBall, setActiveBall] = useState<ClientDataType | null>(null);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(TouchSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    })
+    }),
   );
 
+  const handleDragStart = (event: DragStartEvent) => {
+    const { active } = event;
+    if (active.data.current?.type === "Palette") {
+      setActiveBall(active.data.current.colorBall);
+      return;
+    }
+  };
+
   const handleDragEnd = (event: DragEndEvent) => {
+    setActiveBall(null);
     const { active, over } = event;
 
     if (over && active.id !== over.id) {
@@ -61,16 +73,21 @@ const Sortable = ({
     <DndContext
       sensors={sensors}
       collisionDetection={closestCenter}
+      onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
-      modifiers={[restrictToHorizontalAxis, restrictToParentElement]}
+      modifiers={[restrictToParentElement]}
     >
       <SortableContext items={sortItems} strategy={sortingStrategy}>
         {sortItems.map(item => (
           <SortableItem key={item.id} {...item} />
         ))}
+        {createPortal(
+          <DragOverlay>
+            {activeBall && <ColorBall bgcolor={getColorHash(activeBall.code)} />}
+          </DragOverlay>,
+          document.body,
+        )}
       </SortableContext>
     </DndContext>
   );
 };
-
-export default Sortable;
