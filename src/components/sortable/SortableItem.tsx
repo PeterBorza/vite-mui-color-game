@@ -1,7 +1,7 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { ColorBall } from "components";
-import { ClientDataType } from "context";
+import { ClientDataType } from "types";
 import { CSSProperties } from "react";
 import { getColorHash } from "utils";
 
