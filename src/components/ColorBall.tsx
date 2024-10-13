@@ -29,7 +29,7 @@ export const ColorBall = styled(MyBox)(({ bgcolor }: ColorBall) => ({
     transition: "all 100ms cubic-bezier(0.165, 0.84, 0.44, 1)",
   },
   "&:hover": {
-    WebkitTransform: "scale(1.05, 1.05)",
-    transform: "scale(1.05, 1.05)",
+    WebkitTransform: "scale(1.02, 1.02)",
+    transform: "scale(1.02, 1.02)",
   },
 })) as typeof MuiBox;
