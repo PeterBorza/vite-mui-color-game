@@ -19,9 +19,9 @@ import {
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
 import { ColorBall } from "components";
-import { ClientDataType } from "types";
 import { Dispatch, SetStateAction, useState } from "react";
 import { createPortal } from "react-dom";
+import { ClientDataType } from "types";
 import { getColorHash } from "utils";
 
 import { SortableItem } from "./SortableItem";

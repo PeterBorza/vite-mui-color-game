@@ -1,5 +1,5 @@
 export type ColorType = {
-    code: string;
-  };
+  code: string;
+};
 
 export type ClientDataType = ColorType & { id: string };

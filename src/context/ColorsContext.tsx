@@ -1,4 +1,4 @@
-import {  getColors } from "firestoreClient";
+import { getColors } from "firestoreClient";
 import {
   Dispatch,
   ReactNode,
@@ -19,7 +19,7 @@ type ColorsContextType = {
 const initialContext: ColorsContextType = {
   colors: [],
   setColors: () => null,
-  loading: false
+  loading: false,
 };
 
 const ColorsContext = createContext<ColorsContextType>(initialContext);
@@ -33,16 +33,22 @@ export const ColorsContextProvider = ({ children }: { children: ReactNode }) => 
     try {
       const data = await getColors();
       setColors(data);
-    } catch(err){alert(`Something went wrong in fetching: ${err}`)}
-    finally {setLoading(false)}
-
+    } catch (err) {
+      alert(`Something went wrong in fetching: ${err}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     getAsyncColors();
   }, []);
 
-  return <ColorsContext.Provider value={{ colors, setColors, loading }}>{children}</ColorsContext.Provider>;
+  return (
+    <ColorsContext.Provider value={{ colors, setColors, loading }}>
+      {children}
+    </ColorsContext.Provider>
+  );
 };
 
 export const useColors = () => useContext(ColorsContext);

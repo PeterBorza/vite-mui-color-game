@@ -1,9 +1,8 @@
 import { Typography } from "@mui/material";
+import w1 from "assets/images/w1.jpg";
 import { NAV_TITLE } from "utils";
 
-import w1 from "assets/images/w1.jpg";
-
-const Logo = () => {
+export const Logo = () => {
   return (
     <Typography
       fontFamily="Luckiest Guy, sans serif"
@@ -24,5 +23,3 @@ const Logo = () => {
     </Typography>
   );
 };
-
-export default Logo;
